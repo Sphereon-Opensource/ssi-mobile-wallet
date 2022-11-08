@@ -31,6 +31,7 @@ import SSIPEXVerificationScreen from '../screens/SSIPEXVerificationScreen'
 import SSIQRReader from '../screens/SSIQRReader'
 import SSIVerificationCodeScreen from '../screens/SSIVerificationCodeScreen'
 import Veramo from '../screens/Veramo'
+import SSISelectCredentialTypeScreen from '../screens/SSISelectCredentialTypeScreen'
 
 const format = require('string-format')
 
@@ -309,6 +310,16 @@ const QRStack = (): JSX.Element => {
                 })
               }
             />
+          )
+        })}
+      />
+      <Stack.Screen
+        name={QrRoutesEnum.SELECT_CREDENTIAL_TYPE}
+        component={SSISelectCredentialTypeScreen}
+        options={({ route }) => ({
+          headerTitle: 'Credential offers',
+          header: (props: NativeStackHeaderProps) => (
+            <SSIHeaderBar {...props} showBackButton={Platform.OS === PlatformsEnum.IOS} showMoreButton={false} />
           )
         })}
       />

@@ -5,8 +5,8 @@ import { CredentialStatusEnum, ICredentialDetailsRow, ICredentialSummary } from 
 
 const { v4: uuidv4 } = require('uuid')
 
-function toCredentialDetailsRow(object: Object): ICredentialDetailsRow[] {
-  let rows: any[] = []
+function toCredentialDetailsRow(object: Object, level: number): ICredentialDetailsRow[] {
+  let rows: ICredentialDetailsRow[] = []
   // console.log(`OBJECT: ${JSON.stringify(object, null, 2)}`)
   for (const [key, value] of Object.entries(object)) {
     /* if (value === undefined) {
@@ -14,16 +14,29 @@ function toCredentialDetailsRow(object: Object): ICredentialDetailsRow[] {
     }*/
 
     // TODO fix hacking together the image
-    if (key.toLowerCase().includes('image')) {
-      // console.log(`IMAGE!!!!!${key}:${value}`)
-      rows.push({
-        id: uuidv4(),
-        label: 'image',
-        value: typeof value === 'string' ? value : value.id
-      })
+    if (key.toLowerCase().includes('image') /*&& (typeof value === 'string' || value.type?.toLowerCase() === 'image')*/) {
+      let image
+      if (typeof value === 'string') {
+        image = value
+      } else if (value.id) {
+        image = value.id
+      }
+      console.log(`VALUE: ${image}` )
+      console.log(`IMAGE!!!!!${key}:${JSON.stringify(value)}`)
+      if (image) {
+        console.log('Image added')
+        rows.push({
+          level,
+          id: uuidv4(),
+          label: 'image',
+          value: image
+        })
+      }
+
       continue
     } else if (key === 'type') {
       rows.push({
+        level,
         id: uuidv4(),
         label: key,
         value: value
@@ -33,12 +46,13 @@ function toCredentialDetailsRow(object: Object): ICredentialDetailsRow[] {
 
     if (typeof value !== 'string') {
       rows.push({
+        level,
         id: uuidv4(),
         label: key,
         value: undefined
       })
-      // console.log(`NON STRING:${key}`)
-      rows = rows.concat(toCredentialDetailsRow(value))
+      console.log(`NON STRING:${key}`)
+      rows = rows.concat(toCredentialDetailsRow(value, level ? level + 1: undefined ))
     } else {
       console.log(`==>${key}:${value}`)
       let label = key === '0' ? `${value}` : key
@@ -46,6 +60,7 @@ function toCredentialDetailsRow(object: Object): ICredentialDetailsRow[] {
         label = 'subject'
       }
       rows.push({
+        level,
         id: uuidv4(),
         label, // TODO Human readable mapping
         value: key === '0' ? undefined : value
@@ -74,6 +89,7 @@ export function toCredentialSummary(verifiableCredential: ICredential, hash?: st
     : typeof verifiableCredential.type === 'string'
     ? verifiableCredential.type
     : verifiableCredential.type.filter((value) => value !== 'VerifiableCredential')[0]
+  console.log(`TITLE: ${title}`)
   const signedBy =
     typeof verifiableCredential.issuer === 'string'
       ? verifiableCredential.issuer
@@ -83,7 +99,7 @@ export function toCredentialSummary(verifiableCredential: ICredential, hash?: st
 
   console.log(`Signed by: ${signedBy}`)
   console.log(`Credential Subject: ${verifiableCredential.credentialSubject}`)
-  const properties = toCredentialDetailsRow(verifiableCredential.credentialSubject)
+  const properties = toCredentialDetailsRow(verifiableCredential.credentialSubject, 1)
 
   const name =
     typeof verifiableCredential.issuer === 'string'

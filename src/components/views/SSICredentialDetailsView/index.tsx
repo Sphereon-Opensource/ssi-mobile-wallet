@@ -28,7 +28,7 @@ const SSICredentialDetailsView: FC<IProps> = (props: IProps): JSX.Element => {
       <LabelRow>
         {itemInfo.item.value && (
           <Column>
-            <DetailsItemLabelCaption style={{ marginLeft: 10 }}>{itemInfo.item.label}</DetailsItemLabelCaption>
+            <DetailsItemLabelCaption style={{ marginLeft: itemInfo.item.level * 10 }}>{itemInfo.item.label}</DetailsItemLabelCaption>
           </Column>
         )}
 
@@ -40,7 +40,7 @@ const SSICredentialDetailsView: FC<IProps> = (props: IProps): JSX.Element => {
 
         {!itemInfo.item.value && (
           <Column>
-            <DetailsItemValueCaption style={{ textDecorationLine: 'underline', marginTop: 10 }}>
+            <DetailsItemValueCaption style={{ textDecorationLine: 'underline', marginTop: 10, marginLeft: itemInfo.item.level * 10}}>
               {itemInfo.item.label}
             </DetailsItemValueCaption>
           </Column>

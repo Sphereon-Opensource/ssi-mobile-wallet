@@ -6,7 +6,7 @@ import {
   CredentialIssuanceStateEnum,
   IButton,
   IConnectionViewItem,
-  ICredentialSummary,
+  ICredentialSummary, ICredentialTypeSelection,
   PopupBadgesEnum,
   PopupImagesEnum
 } from '../index'
@@ -58,6 +58,10 @@ export type StackParamList = {
     primaryButton?: IButton
     secondaryButton?: IButton
   }
+  SelectCredentialType: {
+    credentialTypes: Array<ICredentialTypeSelection>
+    acceptAction: (credentialType: string) => Promise<void>
+  }
 }
 
 export enum RootRoutesEnum {
@@ -82,7 +86,8 @@ export enum HomeRoutesEnum {
 export enum QrRoutesEnum {
   QR_READER = 'QrReader',
   VERIFICATION_CODE = 'VerificationCode',
-  PEX_VERIFICATION = 'PexVerification'
+  PEX_VERIFICATION = 'PexVerification',
+  SELECT_CREDENTIAL_TYPE = 'SelectCredentialType'
 }
 
 export enum ConnectionRoutesEnum {

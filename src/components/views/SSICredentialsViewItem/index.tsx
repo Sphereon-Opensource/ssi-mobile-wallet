@@ -25,8 +25,6 @@ const SSICredentialsViewItem: FC<Props> = (props: Props): JSX.Element => {
   // default values only
   const { showTime = false } = props
 
-  console.log(props)
-
   return (
     <View>
       <ContentTopContainer>

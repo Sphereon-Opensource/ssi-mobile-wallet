@@ -15,7 +15,7 @@ import {
   ConnectionRoutesEnum,
   ConnectionStatusEnum,
   CredentialIssuanceStateEnum,
-  HomeRoutesEnum,
+  HomeRoutesEnum, ICredentialTypeSelection, IIssuerSummary,
   IQrAuthentication,
   IQrData,
   IQrDidSiopAuthenticationRequest,
@@ -38,6 +38,8 @@ import {
 } from '../../styles/styledComponents'
 import { showToast, ToastTypeEnum } from '../../utils/ToastUtils'
 import { toCredentialSummary } from '../../utils/mappers/CredentialMapper'
+
+const { v4: uuidv4 } = require('uuid')
 
 type Props = NativeStackScreenProps<StackParamList, QrRoutesEnum.QR_READER>
 
@@ -168,17 +170,40 @@ const SSIQRReaderScreen: FC<Props> = (props: Props): JSX.Element => {
           return Promise.reject(error)
         })
 
-    // TODO user_pin_required needs an update from the lib to be an actual boolean
-    if (qrData.issuanceInitiation.issuanceInitiationRequest.user_pin_required === 'true') {
-      props.navigation.navigate(QrRoutesEnum.VERIFICATION_CODE, {
-        credentialName: Array.isArray(qrData.issuanceInitiation.issuanceInitiationRequest.credential_type)
-          ? qrData.issuanceInitiation.issuanceInitiationRequest.credential_type.join(', ')
-          : qrData.issuanceInitiation.issuanceInitiationRequest.credential_type,
-        onVerification: async (pin: string) => await sendResponse(qrData.issuanceInitiation, pin)
-      })
-    } else {
-      await sendResponse(qrData.issuanceInitiation)
-    }
+    const metadata = await new OpenId4VcIssuanceProvider().getMetadata({ issuanceInitiation: qrData.issuanceInitiation })
+    const supported_credentials = metadata.oid4vci_metadata
+        ? Object.keys(metadata.oid4vci_metadata.credentials_supported).map(key => (
+            {
+              id: uuidv4(),
+              credentialType: key,
+              checked: false
+            }
+        ))
+        : [{
+          id: uuidv4(),
+          credentialType: 'OpenBadgeCredential',
+          checked: false
+        }]
+
+
+    // console.log(`meta: ${JSON.stringify(metadata, null, 2)}`)
+
+    props.navigation.navigate(QrRoutesEnum.SELECT_CREDENTIAL_TYPE, {
+      credentialTypes: supported_credentials,
+      acceptAction: async (credentialType: string) => {
+        // TODO user_pin_required needs an update from the lib to be an actual boolean
+        if (qrData.issuanceInitiation.issuanceInitiationRequest.user_pin_required === 'true') {
+          props.navigation.navigate(QrRoutesEnum.VERIFICATION_CODE, {
+            credentialName: Array.isArray(qrData.issuanceInitiation.issuanceInitiationRequest.credential_type)
+                ? qrData.issuanceInitiation.issuanceInitiationRequest.credential_type.join(', ')
+                : qrData.issuanceInitiation.issuanceInitiationRequest.credential_type,
+            onVerification: async (pin: string) => await sendResponse(qrData.issuanceInitiation, pin)
+          })
+        } else {
+          await sendResponse(qrData.issuanceInitiation)
+        }
+      }
+    })
   }
 
   // TODO move to better place

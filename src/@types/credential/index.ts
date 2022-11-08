@@ -13,7 +13,7 @@ export enum CredentialIssuanceStateEnum {
 export interface ICredentialSummary {
   id: string
   title: string
-  issuer: IIssuerSummary | string
+  issuer: IIssuerSummary
   credentialStatus: CredentialStatusEnum
   issueDate: number
   expirationDate: number
@@ -30,7 +30,16 @@ export interface IIssuerSummary {
 
 // TODO interface should be replaced by proper interface for credential details
 export interface ICredentialDetailsRow {
+  level: number
   id: string
   label: string
   value: any
+}
+
+// TODO interface should be replaced by proper interface for credential selection
+export interface ICredentialTypeSelection {
+  id: string
+  credentialType: string
+  //issuer: IIssuerSummary
+  checked: boolean
 }
