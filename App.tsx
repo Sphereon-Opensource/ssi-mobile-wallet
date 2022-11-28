@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { LogBox, StatusBar } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import ShareMenu, { ShareMenuReactView } from 'react-native-share-menu'
 import { Provider } from 'react-redux'
 
 import 'react-native-gesture-handler'
@@ -12,6 +13,8 @@ import { navigationRef } from './src/navigation/rootNavigation'
 import DeepLinkProvider from './src/providers/deepLinking/DeepLinkProvider';
 import store from './src/store'
 import { backgrounds } from './src/styles/colors'
+
+const RNFS = require('react-native-fs');
 
 LogBox.ignoreLogs([
   // Ignore require cycles for the app in dev mode. They do show up in Metro!
@@ -26,9 +29,55 @@ LogBox.ignoreLogs([
   'Unable to activate keep awake'
 ])
 
+type SharedItem = {
+  mimeType: string,
+  data: string,
+  extraData: any,
+};
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
 
+  const [sharedData, setSharedData] = useState(null);
+  const [sharedMimeType, setSharedMimeType] = useState(null);
+  const handleShare = useCallback((item: any) => {
+    if (!item) {
+      return;
+    }
+
+    const { mimeType, data, extraData } = item;
+    console.log(`item: ${JSON.stringify(item, null, 2)}`)
+
+    RNFS.readFile(data, "base64").then((data2: any) => console.log(data2))
+
+    setSharedData(data);
+    setSharedMimeType(mimeType);
+    // You can receive extra data from your custom Share View
+    console.log(extraData);
+  }, []);
+
+  useEffect(() => {
+    ShareMenu.getInitialShare(handleShare);
+  }, []);
+
+  useEffect(() => {
+    const listener = ShareMenu.addNewShareListener(handleShare);
+
+    return () => {
+      listener.remove();
+    };
+  }, []);
+
+  if (sharedMimeType === "text/plain") {
+    // The user shared text
+    console.log('text/plain')
+    console.log(`data: ${JSON.stringify(sharedData, null, 2)}`)
+  }
+
+  if (sharedMimeType === "image/") {
+    // The user shared text
+    console.log('image/')
+  }
   useEffect(() => {
     async function prepare(): Promise<void> {
       try {
