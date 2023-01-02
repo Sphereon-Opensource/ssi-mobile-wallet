@@ -1,0 +1,25 @@
+diff --git a/node_modules/@bitauth/libauth/build/main/lib/format/log.js b/node_modules/@bitauth/libauth/build/main/lib/format/log.js
+index 6a1f908..0fedcfc 100644
+--- a/node_modules/@bitauth/libauth/build/main/lib/format/log.js
++++ b/node_modules/@bitauth/libauth/build/main/lib/format/log.js
+@@ -69,8 +69,8 @@ exports.sortObjectKeys = (objectOrArray
+         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+         [key]: exports.sortObjectKeys(objectOrArray[key]) })), {});
+ };
+-const uint8ArrayRegex = /"<Uint8Array: 0x(?<hex>[0-9a-f]*)>"/gu;
+-const bigIntRegex = /"<bigint: (?<bigint>[0-9]*)n>"/gu;
++//const uint8ArrayRegex = /"<Uint8Array: 0x(?<hex>[0-9a-f]*)>"/gu;
++//const bigIntRegex = /"<bigint: (?<bigint>[0-9]*)n>"/gu;
+ /**
+  * An alternative to `stringify` which produces valid JavaScript for use as a
+  * test vector in this library. `Uint8Array`s are constructed using `hexToBin`
+@@ -91,7 +91,7 @@ value, alphabetize = true) => {
+         ? exports.stringify(exports.sortObjectKeys(value))
+         : exports.stringify(value);
+     return stringified
+-        .replace(uint8ArrayRegex, "hexToBin('$1')")
+-        .replace(bigIntRegex, "BigInt('$1')");
++        /*.replace(uint8ArrayRegex, "hexToBin('$1')")
++        .replace(bigIntRegex, "BigInt('$1')")*/;
+ };
+ //# sourceMappingURL=log.js.map

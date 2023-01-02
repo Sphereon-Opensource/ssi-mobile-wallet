@@ -9,7 +9,7 @@ platform :ios, podfile_properties['ios.deploymentTarget'] || '12.0'
 install! 'cocoapods',
   :deterministic_uuids => false
 
-target 'SSIWallet' do
+target 'SphereonWallet' do
   use_expo_modules!
 
   pod 'expo-dev-menu', path: '../node_modules/expo-dev-menu', :configurations => :debug
@@ -35,21 +35,21 @@ target 'SSIWallet' do
 #    pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}/BluetoothPeripheral"
 #    pod 'Permission-Calendars', :path => "#{permissions_path}/Calendars"
     pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
-    pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
+#    pod 'Permission-Contacts', :path => "#{permissions_path}/Contacts"
     pod 'Permission-FaceID', :path => "#{permissions_path}/FaceID"
 #    pod 'Permission-LocationAccuracy', :path => "#{permissions_path}/LocationAccuracy"
 #    pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
 #    pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
-    pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
+#    pod 'Permission-MediaLibrary', :path => "#{permissions_path}/MediaLibrary"
 #    pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
 #    pod 'Permission-Motion', :path => "#{permissions_path}/Motion"
     pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
 #    pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 #    pod 'Permission-PhotoLibraryAddOnly', :path => "#{permissions_path}/PhotoLibraryAddOnly"
-    pod 'Permission-Reminders', :path => "#{permissions_path}/Reminders"
+#    pod 'Permission-Reminders', :path => "#{permissions_path}/Reminders"
 #    pod 'Permission-Siri', :path => "#{permissions_path}/Siri"
 #    pod 'Permission-SpeechRecognition', :path => "#{permissions_path}/SpeechRecognition"
-    pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit"
+#    pod 'Permission-StoreKit', :path => "#{permissions_path}/StoreKit"
     pod 'CatCrypto', :git => 'https://github.com/Sphereon-Opensource/CatCrypto'
 
   # Uncomment to opt-in to using Flipper
