@@ -23,8 +23,8 @@
     "connection_details_view_details": "Details",
     "connection_details_action_connect": "Connect",
     "connection_details_action_disconnect": "Disconnect",
-    "alert_action_confirm": "Confirm",
-    "modal_action_cancel": "Cancel",
+    "action_confirm_label": "Confirm",
+    "action_cancel_label": "Cancel",
     "connect_provider_confirm_message": "Are you sure you want to connect with provider: {0}.",
     "connect_provider_success_message": "Provider: {0} has been connected.",
     "disconnect_provider_confirm_message": "Are you sure you want to disconnect with provider: {0}.",
@@ -77,5 +77,9 @@
     "contact_details_info_tab_header_label": "Info",
     "contact_details_activity_tab_header_label": "Activity",
     "contact_details_connections_tab_header_label": "Connections",
-    "intent_share_file_unable_to_receive_message": "Unable to receive Verifiable Credential"
+    "intent_share_file_unable_to_receive_message": "Unable to receive the credential",
+    "credential_delete_title": "Delete credential",
+    "credential_delete_message": "Are you sure you want to delete the credential: {0}?",
+    "credential_deleted_success_toast": "Credential successfully deleted",
+    "credential_deleted_failed_toast": "Unable to delete the credential"
 }

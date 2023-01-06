@@ -55,7 +55,7 @@ const SSIPopup: FC<IProps> = (props: IProps): JSX.Element => {
   } = props
 
   return (
-    <Container style={{ backgroundColor: darkMode ? backgrounds.primaryDark : undefined }}>
+    <Container style={{ backgroundColor: darkMode ? backgrounds.primaryDark : backgrounds.primaryLight }}>
       <HeaderContainer>
         {onClose && (
           <CloseButtonContainer>

@@ -22,7 +22,7 @@ const SSIAlertModal: FC<Props> = (props: Props): JSX.Element => {
         <SSIAlert message={message} buttons={buttons} />
         {showCancel ? (
           <SSISecondaryButton
-            title={translate('modal_action_cancel')}
+            title={translate('action_cancel_label')}
             onPress={() => props.navigation.goBack()}
             // TODO move styling to styledComponents (currently there is an issue where this styling prop is not being set correctly)
             style={{ height: 42, flex: 1 }}

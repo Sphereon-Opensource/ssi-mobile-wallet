@@ -10,6 +10,10 @@ export const STORE_CREDENTIAL_SUCCESS = '[CREDENTIAL] STORE_CREDENTIAL_SUCCESS'
 export type STORE_CREDENTIAL_SUCCESS = typeof STORE_CREDENTIAL_SUCCESS
 export const STORE_CREDENTIAL_FAILED = '[CREDENTIAL] STORE_CREDENTIAL_FAILED'
 export type STORE_CREDENTIAL_FAILED = typeof STORE_CREDENTIAL_FAILED
+export const DELETE_CREDENTIAL_SUCCESS = '[CREDENTIAL] DELETE_CREDENTIAL_SUCCESS'
+export type DELETE_CREDENTIAL_SUCCESS = typeof DELETE_CREDENTIAL_SUCCESS
+export const DELETE_CREDENTIAL_FAILED = '[CREDENTIAL] DELETE_CREDENTIAL_FAILED'
+export type DELETE_CREDENTIAL_FAILED = typeof DELETE_CREDENTIAL_FAILED
 
 export interface ICredentialState {
   loading: boolean
@@ -38,9 +42,20 @@ interface IStoreCredentialsFailedAction {
   type: STORE_CREDENTIAL_FAILED
 }
 
+interface IDeleteCredentialsSuccessAction {
+  payload: string
+  type: DELETE_CREDENTIAL_SUCCESS
+}
+
+interface IDeleteCredentialsFailedAction {
+  type: DELETE_CREDENTIAL_FAILED
+}
+
 export type CredentialActionTypes =
   | ICredentialsLoading
   | IGetCredentialsSuccessAction
   | IGetCredentialsFailedAction
   | IStoreCredentialsSuccessAction
   | IStoreCredentialsFailedAction
+  | IDeleteCredentialsSuccessAction
+  | IDeleteCredentialsFailedAction

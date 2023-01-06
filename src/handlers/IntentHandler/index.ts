@@ -1,7 +1,7 @@
 import { ICredential } from '@sphereon/ssi-types'
 import { VerifiableCredential } from '@veramo/core'
 import Debug from 'debug'
-import {EmitterSubscription, EventSubscription, Linking} from 'react-native'
+import { EmitterSubscription, EventSubscription, Linking } from 'react-native'
 import ShareMenu from 'react-native-share-menu'
 
 import { APP_ID } from '../../@config/constants'
@@ -33,6 +33,7 @@ class IntentHandler {
 
   private addListeners = async (): Promise<any> => {
     this.deeplinkListener = Linking.addEventListener('url', this.deepLinkListener)
+    // TODO fix this type issue
     this.shareListener = ShareMenu.addNewShareListener(this.sharedFileDataListener)
   }
 
@@ -43,7 +44,7 @@ class IntentHandler {
 
   private async getDataOnStartup(): Promise<void> {
     await this.handleDeepLinkData()
-    //await this.handleSharedFileData()
+    await this.handleSharedFileData()
   }
 
   private async handleDeepLinkData(): Promise<void> {
@@ -63,6 +64,7 @@ class IntentHandler {
       if (!data) {
         return
       }
+      // Added a timeout to let the navigationRef be mounted. This should be removed once we have a better loading check (appIsReady) that includes the navigation ref
       setTimeout(() => {
         this.sharedFileDataListener(data)
       }, 1000)

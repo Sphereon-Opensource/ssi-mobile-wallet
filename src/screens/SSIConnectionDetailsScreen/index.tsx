@@ -88,7 +88,7 @@ export class SSIConnectionDetailsScreen extends PureComponent<IScreenProps> {
                   message: format(translate('connect_provider_confirm_message'), this.props.route.params.entityName),
                   buttons: [
                     {
-                      caption: translate('alert_action_confirm'),
+                      caption: translate('action_confirm_label'),
                       onPress: this.onConnectClick
                     }
                   ]
@@ -105,7 +105,7 @@ export class SSIConnectionDetailsScreen extends PureComponent<IScreenProps> {
                   message: format(translate('disconnect_provider_confirm_message'), this.props.route.params.entityName),
                   buttons: [
                     {
-                      caption: translate('alert_action_confirm'),
+                      caption: translate('action_confirm_label'),
                       onPress: this.onDisconnectClick
                     }
                   ]

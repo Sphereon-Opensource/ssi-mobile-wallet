@@ -19,7 +19,7 @@ export enum CredentialIssuanceStateEnum {
 
 // TODO create proper interface for credential summary / info
 export interface ICredentialSummary {
-  id: string
+  id: string // TODO this is the hash of the vc. maybe call this hash to avoid confusion
   title: string
   issuer: IIssuerSummary | string
   credentialStatus: CredentialStatusEnum

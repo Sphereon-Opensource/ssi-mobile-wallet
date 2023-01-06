@@ -45,9 +45,9 @@ export const RootStackNavigator = (): JSX.Element => {
       <Stack.Screen name={RootRoutesEnum.MAIN} component={TabStackNavigator} />
       <Stack.Screen
         name={RootRoutesEnum.ALERT_MODAL}
-        children={() => (
+        children={({ navigation, route }) => (
           <>
-            <SSIAlertModal />
+            <SSIAlertModal navigation={navigation} route={route} />
             <Toast
               bottomOffset={toastsBottomOffset}
               autoHide={toastsAutoHide}
@@ -62,9 +62,9 @@ export const RootStackNavigator = (): JSX.Element => {
       />
       <Stack.Screen
         name={RootRoutesEnum.POPUP_MODAL}
-        children={() => (
+        children={({ navigation, route }) => (
           <>
-            <SSIPopupModal />
+            <SSIPopupModal navigation={navigation} route={route} />
             <Toast
               bottomOffset={toastsBottomOffset}
               autoHide={toastsAutoHide}

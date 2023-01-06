@@ -25,7 +25,7 @@ class SSIConnectionsOverviewScreen extends PureComponent<IScreenProps> {
     refreshing: false
   }
 
-  onRefresh = () => {
+  onRefresh = async (): Promise<void> => {
     this.props.getConnectionParties()
     this.setState({ refreshing: false })
   }

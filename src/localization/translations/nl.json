@@ -23,8 +23,8 @@
     "connection_details_view_details": "Details",
     "connection_details_action_connect": "Verbinden",
     "connection_details_action_disconnect": "Verbreken",
-    "alert_action_confirm": "Bevestigen",
-    "modal_action_cancel": "Annuleren",
+    "action_confirm_label": "Bevestigen",
+    "action_cancel_label": "Annuleren",
     "connect_provider_confirm_message": "Weet u zeker dat u wilt verbinden met aanbieder: {0}.",
     "connect_provider_success_message": "Aanbieder: {0} is verbonden",
     "disconnect_provider_confirm_message": "Weet u zeker dat u de verbinding wilt verbreken met aanbieder: {0}.",
@@ -77,5 +77,9 @@
     "contact_details_info_tab_header_label": "Info",
     "contact_details_activity_tab_header_label": "Activiteit",
     "contact_details_connections_tab_header_label": "Connecties",
-    "intent_share_file_unable_to_receive_message": "Kan Verifiable Credential niet ontvangen"
+    "intent_share_file_unable_to_receive_message": "Kan de credential niet ontvangen",
+    "credential_delete_title": "Verwijder credential",
+    "credential_delete_message": "Weet u zeker dat u de credential: {0}, wilt verwijderen?",
+    "credential_deleted_success_toast": "Credential succesvol verwijdert",
+    "credential_deleted_failed_toast": "Kan de credential niet verwijderen"
 }

@@ -1,6 +1,9 @@
+import { ICredentialSummary } from '../../@types'
 import {
   CredentialActionTypes,
   CREDENTIALS_LOADING,
+  DELETE_CREDENTIAL_FAILED,
+  DELETE_CREDENTIAL_SUCCESS,
   GET_CREDENTIALS_FAILED,
   GET_CREDENTIALS_SUCCESS,
   ICredentialState,
@@ -42,6 +45,19 @@ const credentialReducer = (state: ICredentialState = initialState, action: Crede
       }
     }
     case STORE_CREDENTIAL_FAILED: {
+      return {
+        ...state,
+        loading: false
+      }
+    }
+    case DELETE_CREDENTIAL_SUCCESS: {
+      return {
+        ...state,
+        verifiableCredentials: state.verifiableCredentials.filter((vc: ICredentialSummary) => vc.id !== action.payload),
+        loading: false
+      }
+    }
+    case DELETE_CREDENTIAL_FAILED: {
       return {
         ...state,
         loading: false

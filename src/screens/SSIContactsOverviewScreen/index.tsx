@@ -23,7 +23,7 @@ class SSIContactsOverviewScreen extends PureComponent<IScreenProps> {
     refreshing: false
   }
 
-  onRefresh = () => {
+  onRefresh = async (): Promise<void> => {
     this.props.getContacts()
     this.setState({ refreshing: false })
   }

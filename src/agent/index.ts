@@ -116,4 +116,5 @@ export const getSiopAuthenticationRequestDetails = agent.getSiopAuthenticationRe
 export const sendSiopAuthenticationResponse = agent.sendSiopAuthenticationResponse
 export const keyManagerSign = agent.keyManagerSign
 export const dataStoreGetVerifiableCredential = agent.dataStoreGetVerifiableCredential
+export const dataStoreDeleteVerifiableCredential = agent.dataStoreDeleteVerifiableCredential
 export default agent
