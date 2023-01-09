@@ -1,1 +1,11 @@
-<resources/>
+<!--Colors are mainly used for the Splashscreen-->
+<!--TODO figure out what how these dark and light modes are being used -->
+<resources>
+  <color name="splashscreen_background">#202537</color>
+  <color name="iconBackground">#FFFFFF</color>
+  <!--TODO figure out which color controls what-->
+  <color name="colorPrimary">#202537</color>
+  <color name="colorPrimaryDark">#202537</color>
+  <color name="navigationBarColor">#202537</color>
+  <color name="textHint">#C8C8C8</color>
+</resources>
